@@ -1,0 +1,14 @@
+   pipeline {
+     agent any
+     stages {
+       stage('Build') {
+         steps { dir('react-express-mysql') { sh 'docker compose build' } }
+       }
+       stage('Test') {
+         steps { dir('react-express-mysql') { sh 'docker compose config -q' } }
+       }
+       stage('Deploy') {
+         steps { dir('react-express-mysql') { sh 'docker compose up -d' } }
+       }
+     }
+   }
